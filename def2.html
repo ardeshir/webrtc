@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html language="en">
+<head><meta charset="utf-8" />
+<meta name="google-site-verification" content="ypeuHlNvKaakdUl-zfEf9q0Bj9Ve9y-QTmBHhQ6l3WE" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/defcss.css"    rel="stylesheet" />
+	<title>Deferred Processing</title>
+<style></style>
+</head>
+
+<body>
+<div class="container">
+<input class="btn btn-primary" id="Load" type="button" value="Load"></input>
+
+<div id="Section1"></div>
+<div id="Section2"></div>
+<div id="Section3"></div>
+
+<input id="Proceed" type="button" value="Proceed" disabled="true" class="btn btn-primary" ></input>
+<div id="Message"></div>
+</div><!-- end of container -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>$(function() {
+
+
+  var showMessage = function(op) {
+  
+  			 if(typeof op !== 'object')
+  			 	op = { message: 'Parameter not an object', error: true };
+  			 	
+  			 	op.message = op.message || 'No message specified';
+  			 	op.error   = op.error   || false;
+  			 	
+  			 	$('#Message').append(op.error ? 'Error: ' : '')
+  			 				 .append(op.message)
+  			 				 .append('<br/>');		 	   
+         } 
+         
+  var loadSection = function(op) {
+ 
+         var defer = $.Deferred(),
+             $div, msg;
+          
+           if(typeof op !== 'object') {
+           		msg = 'Expecting parameter object';
+           		showMessage({message: msg, error: true});
+           		return defer.resolve({statusText: msg});
+           }
+                
+                op.selector  = op.selector || '';
+                op.url       = op.url      || '';
+                op.dynamic   = op.dynamic  || false;
+                
+           if(op.url === '') {
+               msg = 'Missing URL';
+               showMessage({message: msg, error: true});
+           	   return defer.resolve({statusText: msg});
+           }
+           
+           	$div = $(op.selector); 
+           	
+           	if($div.length > 0) {
+           	  $.get(op.url, function(){}, 'html')
+           	       .done(function(result) {
+           	            $div.html(result);
+           	            if(!op.dynamic) { defer.resolve(); }
+           	        })
+           	        .fail(function(result) {
+           	        	 msg = 'Could not load URL: ' + op.url;
+           	        	 showMessage({message: msg, error: true});
+           	        	 defer.resolve(result);
+           	        });
+           	        
+           	        if(op.dynamic) 
+           	        	$div.off('complete,failure')
+           	        	    .on('complete', function(event) {
+           	        	       defer.resolve();
+           	        	    })
+           	        	    .on('failure', function(event, result) {
+           	        	      msg = 'Dynamic content: ' + result.statusText;
+           	        	      showMessage({message: msg, error: true});
+           	        	      defer.reject(result);
+           	        	    });
+           	  
+           	} else {
+           	  msg = 'Error in selctor';
+           	  showMessage({message: mgs, error: true});
+           	  defer.reject({statusTest: msg});
+           	}  
+            return defer.promise();
+      }
+      
+
+   $("#Load").click( function(){
+        $.when( 
+           showMessage({message: 'Starting process'}),
+           loadSection({selector: '#Section1' , url: 'content1b.html', 
+                        dynamic: true}),
+           loadSection({selector: '#Section2' , url: 'content2.html'}),
+           loadSection({selector: '#Section3' , url: 'content3b.html',
+                        dynamic: true}),
+           showMessage({message: 'Done with processing'})
+         )
+         .done( function() {
+         })
+         .fail( function(result){
+         	   $('#Message').append('Failure!<br/>')
+         	   .append('Result: ' + result.statusText + '<br/>');
+         })
+         .always(function() {
+               $('#Proceed').removeAttr('disabled'); 
+         });
+         
+    });
+
+});</script>
+</body>
+</html>

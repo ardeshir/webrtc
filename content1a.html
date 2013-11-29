@@ -1,0 +1,15 @@
+<div id="Content1">
+This is content #1a 
+</div>
+
+<script>$(function() {
+  
+  setTimeout(function() {
+       $('#Content1')
+         .append('<hr/>')
+         .append('more content loaded dynamically')
+         .trigger('complete');
+
+  }, 3000); 
+   
+});</script>

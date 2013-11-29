@@ -1,0 +1,43 @@
+#Section1, #Section2, #Section3 {
+position: absolute;
+margin: 10px;
+background-image: -moz-radial-gradient(30px 30px, #FFF, #EEF);
+background-image: radial-gradient(30px 30px, #FFF, #EEF);
+width: 200px;
+height: 200px;
+border: 1px solid black;
+top: 50px;
+overflow-y: auto;
+}
+#Load {
+ position: absolute;
+ top: 20px;
+ left: 20px;
+}
+#Section1{
+  left: 10px;
+}
+
+#Section2{
+  left: 220px;
+}
+
+#Section3{
+  left: 430px;
+}
+
+#Proceed{
+ position: absolute;
+ width: 100px;
+ top: 280px;
+ left: 530px;
+}
+#Message{
+position: absolute;
+
+width: 490px;
+height:100px;
+left: 20px;
+top: 280px;
+overflow-y: auto;
+}

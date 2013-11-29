@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html language="en">
+<head><meta charset="utf-8" />
+<meta name="google-site-verification" content="ypeuHlNvKaakdUl-zfEf9q0Bj9Ve9y-QTmBHhQ6l3WE" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/defcss.css"    rel="stylesheet" />
+	<title>Deferred Processing</title>
+<style></style>
+</head>
+
+<body>
+<div class="container">
+<input class="btn btn-primary" id="Load" type="button" value="Load"></input>
+
+<div id="Section1"></div>
+<div id="Section2"></div>
+<div id="Section3"></div>
+
+<input id="Proceed" type="button" value="Proceed" disabled="true" class="btn btn-primary" ></input>
+<div id="Message"></div>
+</div><!-- end of container -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>$(function() {
+
+  var loadSection = function(op) {
+           if(typeof op !== 'object')
+                op = {};
+                op.selector = op.selector || '';
+                op.url       = op.url     || '';
+                
+            return $.get(op.url, function(result) {
+                        $(op.selector).html(result)
+                        }, 'html');
+      }
+
+   $("#Load").click( function(){
+       var defer = $.when(      
+           loadSection({selector: '#Section1' , url: 'content1a.html'}),
+           loadSection({selector: '#Section2' , url: 'content2.html'}),
+           loadSection({selector: '#Section3' , url: 'content3.html'})
+         )
+         .promise()
+         .done(function() {
+         
+               defer.done( function(result){
+         	   $('#Message')
+         	   .append('4rd done, from inside!<br/>');
+         });
+               
+         })
+         .done(function() {
+              $('#Message').append('2nd Done!<br/>')  
+         })
+         .always(function() {
+               $('#Proceed').removeAttr('disabled'); 
+         })
+         .fail( function(result){
+         	   $('#Message').append('Failure!<br/>')
+         	   .append('Result: ' + result.statusText + '<br/>');
+         });
+         
+         defer.done( function(result){
+         	   $('#Message')
+         	   .append('3rd done, from return on deferred obj<br/>');
+         });
+    });
+
+});</script>
+</body>
+</html>
