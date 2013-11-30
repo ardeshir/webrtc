@@ -244,42 +244,8 @@ function log_error(error) {
 </head>
 <!-- link rel="stylesheet" href="main.css" / -->
 <link rel="stylesheet" href="/css/style.css" />
-<style>
-html, body {
-  padding: 0px;
-  margin: 0px;
-  font-family: "Arial","Helvetica",sans-serif;
-}
-#loading_state {
-  position: absolute;
-  top: 45%;
-  left: 0px;
-  width: 100%;
-  font-size: 20px;
-  text-align: center;
-}
-#open_call_state {
-  display: none;
-}
-#local_video {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 160px;
-  height: 120px;
-  background: #333333;
-}
-#remote_video {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 1024px;
-  height: 768px;
-  background: #999999;
-}
-</style>
 </head>
-<body onload="start()">
+<body>
     <!-- Docs master nav -->
     <header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
     <div class="navbar-header">
@@ -319,26 +285,31 @@ html, body {
   </header>
 
 <div id="container">
+ <!-- p>Click a button to call <code>getUserMedia()</code> with appropriate resolution.</p -->
+ <div class="jumbotron">
+ <h1><em>"Corn dog for you!"</em></h1>
+ 
+<h2 class="text-primary">Click a button to call <code>getUserMedia()</code> with appropriate resolution.</h2>
+	<div id="buttons">
+	  <button id="qvga" class="btn btn-primary">QVGA</button>
+	  <button id="vga" class="btn btn-primary">VGA</button>
+	  <button id="hd" class="btn btn-primary">HD</button>
+	</div>
 
-  <div id="loading_state">
-    loading...
+  <p id="dimensions" class="text-primary"></p>
+
+  <video autoplay></video>
   </div>
-  
-  <div id="open_call_state">
-    <video id="remote_video"></video>
-    <video id="local_video"></video>
-  </div>
+ </div>
 
 
-</div><!-- end container -->
-
-<!-- div class="container">
+<div class="container">
 		<hr/>
 		<footer class="footer pull-right">
 			powered by <a href="http://www.idsia.ch/~juergen/metalearner.html">metalearn.org</a>
 	        <div><em>Learning to Learn</em></div>
 	    </footer>
-</div -->
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
