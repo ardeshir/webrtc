@@ -1,8 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<script>
+<html >
+<head><title>Project WebRTC: Video & text Chat</title>
+<meta name="google-site-verification" content="ypeuHlNvKaakdUl-zfEf9q0Bj9Ve9y-QTmBHhQ6l3WE" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+   <!-- link href="/css/bootstrap-theme.css" rel="stylesheet" -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-45939185-1', 'ardeshir.org');
+  ga('send', 'pageview');
+
+</script>
+<script>
 var webrtc_capable = true;
 var rtc_peer_connection = null;
 var rtc_session_description = null;
@@ -228,6 +241,9 @@ function log_error(error) {
 }
 
 </script>
+</head>
+<!-- link rel="stylesheet" href="main.css" / -->
+<!-- link rel="stylesheet" href="/css/style.css" / -->
 <style>
 html, body {
   padding: 0px;
@@ -264,12 +280,70 @@ html, body {
 </style>
 </head>
 <body onload="start()">
+    <!-- Docs master nav -->
+    <header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a href="./" class="navbar-brand">Project WebRTC</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="http://io13webrtc.appspot.com/#1">Getting started</a>
+        </li>
+      
+        <!-- li>
+          <a href="./css">CSS</a>
+        </li>
+        <li>
+          <a href="./components">Components</a>
+        </li>
+        <li>
+          <a href="./javascript">JavaScript</a>
+        </li>
+        <li>
+          <a href="./customize">Customize</a>
+        </li -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="https://www.youtube.com/watch?v=m5yCOSHeYn4&feature=youtube_gdata_player"">About</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+<!-- div id="container" -->
+
   <div id="loading_state">
     loading...
   </div>
+  
   <div id="open_call_state">
     <video id="remote_video"></video>
     <video id="local_video"></video>
   </div>
+
+
+<!-- /div --><!-- end container -->
+
+<!-- div class="container">
+		<hr/>
+		<footer class="footer pull-right">
+			powered by <a href="http://www.idsia.ch/~juergen/metalearner.html">metalearn.org</a>
+	        <div><em>Learning to Learn</em></div>
+	    </footer>
+</div -->
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- script src="/js/main.js"></script -->	
+
 </html>
