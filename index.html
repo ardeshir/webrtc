@@ -91,7 +91,7 @@ function start() {
   setup_video();
 
   // setup generic connection to the signaling server using the WebSocket API
-  signaling_server = new WebSocket("ws://192.168.22.58:1234");
+  signaling_server = new WebSocket("ws://54.245.83.222:80");
 
   if (document.location.hash === "" || document.location.hash === undefined) { // you are the Caller
 
@@ -243,7 +243,7 @@ function log_error(error) {
 </script>
 </head>
 <!-- link rel="stylesheet" href="main.css" / -->
-<link rel="stylesheet" href="/css/style.css" />
+<!-- link rel="stylesheet" href="/css/style.css" / -->
 <style>
 html, body {
   padding: 0px;
@@ -318,7 +318,7 @@ html, body {
     </nav>
   </header>
 
-<div id="container">
+<!-- div id="container" -->
 
   <div id="loading_state">
     loading...
@@ -330,7 +330,7 @@ html, body {
   </div>
 
 
-</div><!-- end container -->
+<!-- /div --><!-- end container -->
 
 <!-- div class="container">
 		<hr/>
@@ -343,6 +343,6 @@ html, body {
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>	
+<!-- script src="/js/main.js"></script -->	
 </body>
 </html>
